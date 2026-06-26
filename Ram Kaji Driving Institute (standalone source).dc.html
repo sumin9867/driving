@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#0E4FB0">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0E4FB0"/>
+    <path d="M250 700 C 250 480, 950 460, 600 300 C 350 190, 950 190, 950 120" fill="none" stroke="#FF8A3D" stroke-width="22" stroke-linecap="round" opacity="0.9"/>
+    <g transform="translate(600 380) rotate(20)">
+      <rect x="-46" y="-78" width="92" height="156" rx="30" fill="#1D6FE3"/>
+      <rect x="-34" y="-58" width="68" height="34" rx="14" fill="#ffffff" opacity="0.92"/>
+      <circle cx="-26" cy="-66" r="9" fill="#FFF4C2"/>
+      <circle cx="26" cy="-66" r="9" fill="#FFF4C2"/>
+    </g>
+    <text x="600" y="600" font-family="Arial, sans-serif" font-size="64" font-weight="800" fill="#ffffff" text-anchor="middle">RK</text>
+    <text x="600" y="660" font-family="Arial, sans-serif" font-size="30" font-weight="600" fill="#BcD7F5" text-anchor="middle">Ram Kaji Driving Institute</text>
+  </svg>
+</template>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;background:#EFF5FD}
+@keyframes rk-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes rk-rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes rk-pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.12)}}
+</style>
+</helmet>
+
+<div id="rk-root" style="position:relative;overflow:clip;min-height:100vh;background:linear-gradient(180deg,#F7FAFE,#EAF2FC);color:var(--ink,#15233B);font-family:'Plus Jakarta Sans',system-ui,sans-serif;--primary:#1D6FE3;--deep:#0E4FB0;--accent:#FF9A3D;--trailA:#FFB03A;--trailB:#FF4D6D;--glow:#FF4D6D;--ink:#15233B;--muted:#5C6E89;--card:#FFFFFF;--line:#E3ECF7">
+
+  <div id="rk-overlay" style="position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden">
+    <svg id="rk-svg" width="100" height="100" viewBox="0 0 100 100" style="position:absolute;top:0;left:0;overflow:visible">
+      <defs>
+        <linearGradient id="rk-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="2000">
+          <stop id="rk-s0" offset="0" stop-color="#FFB03A"></stop>
+          <stop id="rk-s1" offset="1" stop-color="#FF4D6D"></stop>
+        </linearGradient>
+      </defs>
+      <path id="rk-road" d="" fill="none" stroke="#D7E4F4" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path id="rk-dash" d="" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="1 24"></path>
+      <path id="rk-trail" d="" fill="none" stroke="url(#rk-grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(255,77,109,.6)) drop-shadow(0 0 12px rgba(255,176,58,.35))"></path>
+    </svg>
+    <div id="rk-car" style="position:absolute;left:0;top:0;width:42px;height:72px;transition:transform .08s linear;filter:drop-shadow(0 8px 12px rgba(20,40,80,.28))">
+      <div style="position:absolute;inset:0;border-radius:15px;background:linear-gradient(170deg,var(--primary,#1D6FE3),var(--deep,#0E4FB0))"></div>
+      <div style="position:absolute;top:8px;left:6px;right:6px;height:16px;border-radius:8px 8px 5px 5px;background:rgba(255,255,255,.9)"></div>
+      <div style="position:absolute;bottom:12px;left:7px;right:7px;height:13px;border-radius:5px 5px 7px 7px;background:rgba(255,255,255,.32)"></div>
+      <div style="position:absolute;top:3px;left:7px;width:6px;height:6px;border-radius:50%;background:#FFF4C2;box-shadow:0 0 7px 2px rgba(255,225,120,.85)"></div>
+      <div style="position:absolute;top:3px;right:7px;width:6px;height:6px;border-radius:50%;background:#FFF4C2;box-shadow:0 0 7px 2px rgba(255,225,120,.85)"></div>
+      <div style="position:absolute;bottom:3px;left:8px;width:5px;height:4px;border-radius:2px;background:#FF6B6B"></div>
+      <div style="position:absolute;bottom:3px;right:8px;width:5px;height:4px;border-radius:2px;background:#FF6B6B"></div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <header style="position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(12px);background:rgba(255,255,255,.82);border-bottom:1px solid var(--line,#E3ECF7)">
+    <nav style="width:min(1180px,93vw);margin:0 auto;height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px">
+      <a href="#home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <span style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(150deg,var(--primary,#1D6FE3),var(--deep,#0E4FB0));color:#fff;font-family:'Sora',sans-serif;font-weight:800;font-size:17px;letter-spacing:.5px;box-shadow:0 8px 18px -8px rgba(29,111,227,.7)">RK</span>
+        <span style="display:flex;flex-direction:column;line-height:1.05">
+          <strong style="font-family:'Sora',sans-serif;font-weight:700;font-size:15.5px;letter-spacing:.2px">Ram Kaji Driving</strong>
+          <span style="font-family:'Noto Sans Devanagari',sans-serif;font-size:11.5px;color:var(--muted,#5C6E89)">रामकाजी ड्राइभिङ इन्स्टिच्युट</span>
+        </span>
+      </a>
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <a href="#home" style="padding:9px 14px;border-radius:10px;text-decoration:none;color:var(--ink,#15233B);font-weight:600;font-size:14.5px">Home</a>
+        <a href="#courses" style="padding:9px 14px;border-radius:10px;text-decoration:none;color:var(--ink,#15233B);font-weight:600;font-size:14.5px">Courses</a>
+        <a href="#about" style="padding:9px 14px;border-radius:10px;text-decoration:none;color:var(--ink,#15233B);font-weight:600;font-size:14.5px">About</a>
+        <a href="#contact" style="padding:9px 14px;border-radius:10px;text-decoration:none;color:var(--ink,#15233B);font-weight:600;font-size:14.5px">Contact</a>
+        <a href="tel:9841346288" style="display:inline-flex;align-items:center;gap:8px;margin-left:6px;padding:11px 18px;border-radius:999px;background:var(--primary,#1D6FE3);color:#fff;font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 10px 22px -10px rgba(29,111,227,.7)" style-hover="filter:brightness(1.06);transform:translateY(-1px)">
+          <span style="width:7px;height:7px;border-radius:50%;background:#9EF5C4;box-shadow:0 0 0 4px rgba(158,245,196,.3)"></span>
+          9841346288
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" data-screen-label="Home" style="position:relative;z-index:2;scroll-margin-top:80px;width:min(1180px,93vw);margin:0 auto;padding:clamp(70px,12vh,140px) 0 clamp(60px,8vw,100px);display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(28px,5vw,72px);align-items:center">
+    <div>
+      <span style="display:inline-flex;align-items:center;gap:9px;padding:7px 14px;border-radius:999px;background:rgba(29,111,227,.1);color:var(--deep,#0E4FB0);font-weight:700;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase">★ Saibu · Lalitpur · Nepal</span>
+      <h1 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(38px,6vw,68px);line-height:1.03;letter-spacing:-.02em;margin:18px 0 0">Learn to drive with <span style="color:var(--primary,#1D6FE3)">confidence.</span></h1>
+      <p style="font-family:'Noto Sans Devanagari',sans-serif;font-size:clamp(17px,2.4vw,23px);font-weight:600;color:var(--deep,#0E4FB0);margin:14px 0 0;line-height:1.5">आत्मविश्वासका साथ गाडी चलाउन सिक्नुहोस् ।</p>
+      <p style="font-size:clamp(15px,1.6vw,17.5px);color:var(--muted,#5C6E89);line-height:1.65;margin:18px 0 0;max-width:30em">Car, motorcycle and scooter training from skilled, experienced instructors — with full licence-test preparation on real practice grounds.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:30px">
+        <a href="#contact" style="display:inline-flex;align-items:center;gap:9px;padding:15px 26px;border-radius:999px;background:var(--primary,#1D6FE3);color:#fff;font-weight:700;font-size:15.5px;text-decoration:none;box-shadow:0 14px 30px -12px rgba(29,111,227,.75)" style-hover="transform:translateY(-2px);filter:brightness(1.05)">Enroll now <span style="font-size:18px;line-height:1">→</span></a>
+        <a href="#contact" style="display:inline-flex;align-items:center;gap:9px;padding:15px 26px;border-radius:999px;background:#fff;color:var(--deep,#0E4FB0);font-weight:700;font-size:15.5px;text-decoration:none;border:1.5px solid var(--line,#E3ECF7);box-shadow:0 10px 26px -16px rgba(20,40,80,.5)" style-hover="transform:translateY(-2px);border-color:var(--primary,#1D6FE3)">Book a free trial</a>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:28px">
+        <span style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:12px;background:#fff;border:1px solid var(--line,#E3ECF7);font-weight:600;font-size:13.5px;color:var(--ink,#15233B)"><span style="color:var(--primary,#1D6FE3);font-weight:800">✓</span> Experienced instructors</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:12px;background:#fff;border:1px solid var(--line,#E3ECF7);font-weight:600;font-size:13.5px;color:var(--ink,#15233B)"><span style="color:var(--primary,#1D6FE3);font-weight:800">✓</span> Licence-test ready</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:12px;background:#fff;border:1px solid var(--line,#E3ECF7);font-weight:600;font-size:13.5px;color:var(--ink,#15233B)"><span style="color:var(--primary,#1D6FE3);font-weight:800">✓</span> Flexible timing</span>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div style="position:relative;aspect-ratio:4/5;border-radius:26px;overflow:hidden;border:1px solid var(--line,#E3ECF7);box-shadow:0 40px 80px -40px rgba(20,50,100,.5)">
+        <img src="images/hero-course.png" alt="Ram Kaji Driving Institute practice ground in Lalitpur" style="display:block;width:100%;height:100%;object-fit:cover">
+        <span style="position:absolute;left:14px;top:14px;display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:999px;background:rgba(12,35,66,.78);color:#fff;font-size:12px;font-weight:700;backdrop-filter:saturate(160%) blur(5px)">Our trial ground · Saibu</span>
+      </div>
+      <div style="position:absolute;bottom:-22px;left:-22px;background:#fff;border-radius:18px;padding:16px 18px;box-shadow:0 24px 50px -24px rgba(20,40,80,.45);border:1px solid var(--line,#E3ECF7);animation:rk-bob 4.5s ease-in-out infinite">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(255,154,61,.16);color:var(--accent,#FF9A3D);font-size:20px;font-weight:800">★</span>
+          <span style="line-height:1.15"><strong style="display:block;font-family:'Sora',sans-serif;font-size:16px">Trusted local trainers</strong><span style="font-size:12.5px;color:var(--muted,#5C6E89)">Cars · Bikes · Scooters</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="courses" data-screen-label="Courses" style="position:relative;z-index:2;scroll-margin-top:80px;width:min(1180px,93vw);margin:0 auto;padding:clamp(50px,7vw,90px) 0">
+    <div style="text-align:center;max-width:42rem;margin:0 auto">
+      <span style="display:inline-block;padding:7px 14px;border-radius:999px;background:rgba(29,111,227,.1);color:var(--deep,#0E4FB0);font-weight:700;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase">Our Courses</span>
+      <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(28px,4.4vw,46px);letter-spacing:-.02em;margin:14px 0 8px">Training for every rider</h2>
+      <p style="font-family:'Noto Sans Devanagari',sans-serif;font-size:17px;color:var(--muted,#5C6E89);margin:0">गाडी, मोटरसाइकल तथा स्कुटर — दक्ष प्रशिक्षकद्वारा</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:46px">
+
+      <div style="background:#fff;border:1px solid var(--line,#E3ECF7);border-radius:22px;padding:30px;box-shadow:0 22px 55px -34px rgba(20,40,80,.5)" style-hover="transform:translateY(-6px);box-shadow:0 34px 70px -34px rgba(20,40,80,.55)">
+        <span style="width:62px;height:62px;border-radius:17px;display:grid;place-items:center;background:rgba(29,111,227,.12);color:var(--primary,#1D6FE3)">
+          <svg viewBox="0 0 48 48" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="22" width="36" height="11" rx="4"></rect><rect x="14" y="13" width="20" height="10" rx="3"></rect><circle cx="16" cy="35" r="4"></circle><circle cx="32" cy="35" r="4"></circle></svg>
+        </span>
+        <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:21px;margin:18px 0 2px">Car Driving</h3>
+        <p style="font-family:'Noto Sans Devanagari',sans-serif;font-size:14px;color:var(--primary,#1D6FE3);font-weight:600;margin:0 0 12px">कार / गाडी प्रशिक्षण</p>
+        <p style="font-size:14.5px;color:var(--muted,#5C6E89);line-height:1.6;margin:0 0 16px">Clutch, gear and steering control with confident on-road practice and full licence-test preparation.</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px">
+          <li style="display:flex;gap:9px;font-size:14px;color:var(--ink,#15233B)"><span style="color:var(--primary,#1D6FE3);font-weight:800">✓</span> Gear &amp; clutch mastery</li>
+          <li style="display:flex;gap:9px;font-size:14px;color:var(--ink,#15233B)"><span style="color:var(--primary,#1D6FE3);font-weight:800">✓</span> Parking &amp; reversing</li>
+          <li style="display:flex;gap:9px;font-size:14px;color:var(--ink,#15233B)"><span style="color:var(--primary,#1D6FE3);font-weight:800">✓</span> Traffic rules &amp; signs</li>
+        </ul>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line,#E3ECF7);border-radius:22px;padding:30px;box-shadow:0 22px 55px -34px rgba(20,40,80,.5)" style-hover="transform:translateY(-6px);box-shadow:0 34px 70px -34px rgba(20,40,80,.55)">
+        <span style="width:62px;height:62px;border-radius:17px;display:grid;place-items:center;background:rgba(255,154,61,.16);color:var(--accent,#FF9A3D)">
+          <svg viewBox="0 0 48 48" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="33" r="6"></circle><circle cx="35" cy="33" r="6"></circle><path d="M13 33 L23 22 L31 22 M23 22 L35 33"></path><path d="M31 22 l5 -4"></path></svg>
+        </span>
+        <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:21px;margin:18px 0 2px">Motorcycle</h3>
+        <p style="font-family:'Noto Sans Devanagari',sans-serif;font-size:14px;color:var(--accent,#FF9A3D);font-weight:600;margin:0 0 12px">मोटरसाइकल प्रशिक्षण</p>
+        <p style="font-size:14.5px;color:var(--muted,#5C6E89);line-height:1.6;margin:0 0 16px">Balance, gear-bike handling and road safety — built up step by step until you are test-ready.</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px">
+          <li style="display:flex;gap:9px;font-size:14px;color:var(--ink,#15233B)"><span style="color:var(--accent,#FF9A3D);font-weight:800">✓</span> Balance &amp; control</li>
+          <li style="display:flex;gap:9px;font-size:14px;color:var(--ink,#15233B)"><span style="color:var(--accent,#FF9A3D);font-weight:800">✓</span> Gear-bike handling</li>
+          <li style="display:flex;gap:9px;font-size:14px;color:var(--ink,#15233B)"><span style="color:var(--accent,#FF9A3D);font-weight:800">✓</span> Trial-ground practice</li>
+        </ul>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line,#E3ECF7);border-radius:22px;padding:30px;box-shadow:0 22px 55px -34px rgba(20,40,80,.5)" style-hover="transform:translateY(-6px);box-shadow:0 34px 70px -34px rgba(20,40,80,.55)">
+        <span style="width:62px;height:62px;border-radius:17px;display:grid;place-items:center;background:rgba(31,158,107,.14);color:#1F9E6B">
+          <svg viewBox="0 0 48 48" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="34" r="5"></circle><circle cx="35" cy="34" r="5"></circle><path d="M13 34 L21 27 L30 27 M30 27 q6 0 5 7"></path><path d="M21 27 L19 16 L25 16"></path></svg>
+        </span>
+        <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:21px;margin:18px 0 2px">Scooter</h3>
+        <p style="font-family:'Noto Sans Devanagari',sans-serif;font-size:14px;color:#1F9E6B;font-weight:600;margin:0 0 12px">स्कुटर प्रशिक्षण</p>
+        <p style="font-size:14.5px;color:var(--muted,#5C6E89);line-height:1.6;margin:0 0 16px">Gearless and beginner-friendly — perfect for daily commuting and getting on the road quickly.</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px">
+          <li style="display:flex;gap:9px;font-size:14px;color:var(--ink,#15233B)"><span style="color:#1F9E6B;font-weight:800">✓</span> Easy gearless start</li>
+          <li style="display:flex;gap:9px;font-size:14px;color:var(--ink,#15233B)"><span style="color:#1F9E6B;font-weight:800">✓</span> City commuting skills</li>
+          <li style="display:flex;gap:9px;font-size:14px;color:var(--ink,#15233B)"><span style="color:#1F9E6B;font-weight:800">✓</span> Confidence for beginners</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TRAINING GROUND -->
+    <div style="margin-top:clamp(46px,6vw,80px);background:#fff;border:1px solid var(--line,#E3ECF7);border-radius:26px;padding:clamp(26px,4vw,44px);box-shadow:0 30px 70px -42px rgba(20,40,80,.5)">
+      <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:26px">
+        <div>
+          <h3 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(22px,3vw,32px);letter-spacing:-.01em;margin:0">Practice on real trial grounds</h3>
+          <p style="font-family:'Noto Sans Devanagari',sans-serif;font-size:15.5px;color:var(--muted,#5C6E89);margin:8px 0 0">वास्तविक ट्रायल मैदानमा अभ्यास</p>
+        </div>
+        <span style="font-size:13.5px;color:var(--muted,#5C6E89);max-width:24rem">Every manoeuvre on the licence test — practised until it's second nature.</span>
+      </div>
+      <div style="border-radius:18px;overflow:hidden;border:1px solid var(--line,#E3ECF7);margin-bottom:16px;position:relative">
+        <img src="images/trial-methods.png" alt="Official trial-test methods signboard at Ram Kaji Driving Institute" style="display:block;width:100%;height:auto">
+        <span style="position:absolute;left:14px;bottom:14px;display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border-radius:999px;background:rgba(12,35,66,.82);color:#fff;font-size:12.5px;font-weight:700;backdrop-filter:saturate(160%) blur(5px)">Official trial-test methods · <span style="font-family:'Noto Sans Devanagari',sans-serif">ट्रायल परीक्षाका तरिकाहरू</span></span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+        <div style="border-radius:16px;overflow:hidden;border:1px solid var(--line,#E3ECF7);background:#fff"><div style="aspect-ratio:4/3;overflow:hidden"><img src="images/ground-circles.png" alt="Figure-8 and circle practice course" style="display:block;width:100%;height:100%;object-fit:cover"></div><div style="padding:12px 15px"><strong style="font-size:14.5px">Figure-8 &amp; circles</strong><div style="font-family:'Noto Sans Devanagari',sans-serif;font-size:12px;color:var(--muted,#5C6E89)">आठको आकार</div></div></div>
+        <div style="border-radius:16px;overflow:hidden;border:1px solid var(--line,#E3ECF7);background:#fff"><div style="aspect-ratio:4/3;overflow:hidden"><img src="images/ground-ramp.png" alt="Bridge and ramp STOP practice" style="display:block;width:100%;height:100%;object-fit:cover"></div><div style="padding:12px 15px"><strong style="font-size:14.5px">Bridge / ramp</strong><div style="font-family:'Noto Sans Devanagari',sans-serif;font-size:12px;color:var(--muted,#5C6E89)">पुल / स्टप</div></div></div>
+        <div style="border-radius:16px;overflow:hidden;border:1px solid var(--line,#E3ECF7);background:#fff"><div style="aspect-ratio:4/3;overflow:hidden"><img src="images/ground-cones.png" alt="Cone and parking practice course" style="display:block;width:100%;height:100%;object-fit:cover"></div><div style="padding:12px 15px"><strong style="font-size:14.5px">Cone &amp; parking course</strong><div style="font-family:'Noto Sans Devanagari',sans-serif;font-size:12px;color:var(--muted,#5C6E89)">कोन तथा पार्किङ</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" data-screen-label="About" style="position:relative;z-index:2;scroll-margin-top:80px;width:min(1180px,93vw);margin:0 auto;padding:clamp(50px,7vw,90px) 0;display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(28px,5vw,64px);align-items:center">
+    <div style="position:relative">
+      <div style="aspect-ratio:5/4;border-radius:24px;overflow:hidden;border:1px solid var(--line,#E3ECF7);box-shadow:0 36px 76px -42px rgba(20,50,100,.5)"><img src="images/about-ground.png" alt="Car practising at Ram Kaji Driving Institute, sign visible" style="display:block;width:100%;height:100%;object-fit:cover"></div>
+      <div style="position:absolute;top:-18px;right:-14px;background:var(--deep,#0E4FB0);color:#fff;border-radius:16px;padding:14px 18px;box-shadow:0 22px 44px -22px rgba(14,79,176,.7)">
+        <strong style="font-family:'Sora',sans-serif;font-size:15px;display:block">Saibu, Lalitpur–18</strong>
+        <span style="font-size:12px;opacity:.85">Easy to reach</span>
+      </div>
+    </div>
+    <div>
+      <span style="display:inline-block;padding:7px 14px;border-radius:999px;background:rgba(29,111,227,.1);color:var(--deep,#0E4FB0);font-weight:700;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase">About us</span>
+      <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(26px,4vw,42px);letter-spacing:-.02em;margin:14px 0 0">Driving skills, taught patiently</h2>
+      <p style="font-family:'Noto Sans Devanagari',sans-serif;font-size:16px;color:var(--deep,#0E4FB0);font-weight:600;margin:10px 0 0;line-height:1.6">दक्ष तथा अनुभवी प्रशिक्षकहरूद्वारा गाडी, मोटरसाइकल तथा स्कुटर प्रशिक्षण गराइन्छ ।</p>
+      <p style="font-size:15.5px;color:var(--muted,#5C6E89);line-height:1.68;margin:16px 0 0">At Ram Kaji Driving Institute in Lalitpur, friendly and experienced trainers guide you from your very first lesson through to passing your licence test — at a pace that suits you.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px">
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;background:rgba(29,111,227,.12);color:var(--primary,#1D6FE3);font-weight:800">✓</span><div><strong style="font-size:14.5px;display:block">Experienced instructors</strong><span style="font-size:12.5px;color:var(--muted,#5C6E89)">अनुभवी प्रशिक्षक</span></div></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;background:rgba(29,111,227,.12);color:var(--primary,#1D6FE3);font-weight:800">✓</span><div><strong style="font-size:14.5px;display:block">Licence-test support</strong><span style="font-size:12.5px;color:var(--muted,#5C6E89)">लाइसेन्स सहयोग</span></div></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;background:rgba(29,111,227,.12);color:var(--primary,#1D6FE3);font-weight:800">✓</span><div><strong style="font-size:14.5px;display:block">Flexible timing</strong><span style="font-size:12.5px;color:var(--muted,#5C6E89)">लचिलो समय</span></div></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;background:rgba(29,111,227,.12);color:var(--primary,#1D6FE3);font-weight:800">✓</span><div><strong style="font-size:14.5px;display:block">Theory + practical</strong><span style="font-size:12.5px;color:var(--muted,#5C6E89)">सैद्धान्तिक र व्यावहारिक</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" data-screen-label="Contact" style="position:relative;z-index:2;scroll-margin-top:80px;width:min(1180px,93vw);margin:0 auto;padding:clamp(50px,7vw,90px) 0">
+    <div style="display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(24px,4vw,48px);align-items:stretch">
+
+      <div style="background:linear-gradient(165deg,var(--primary,#1D6FE3),var(--deep,#0E4FB0));color:#fff;border-radius:26px;padding:clamp(28px,4vw,42px);box-shadow:0 34px 76px -40px rgba(14,79,176,.8)">
+        <span style="display:inline-block;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.18);font-weight:700;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase">Get in touch</span>
+        <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(26px,3.6vw,40px);letter-spacing:-.02em;margin:16px 0 6px">Start driving this week</h2>
+        <p style="font-family:'Noto Sans Devanagari',sans-serif;font-size:15.5px;opacity:.92;margin:0 0 28px">आजै भर्ना हुनुहोस् — सम्पर्क गर्नुहोस्</p>
+
+        <a href="tel:9841346288" style="display:flex;align-items:center;gap:15px;text-decoration:none;color:#fff;padding:16px;border-radius:16px;background:rgba(255,255,255,.12);margin-bottom:13px" style-hover="background:rgba(255,255,255,.2)">
+          <span style="width:46px;height:46px;border-radius:13px;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.18);font-size:20px">☏</span>
+          <span><span style="font-size:12px;opacity:.8;display:block">Call / WhatsApp</span><strong style="font-family:'Sora',sans-serif;font-size:22px;letter-spacing:.5px">9841346288</strong></span>
+        </a>
+        <div style="display:flex;align-items:center;gap:15px;padding:16px;border-radius:16px;background:rgba(255,255,255,.12);margin-bottom:13px">
+          <span style="width:46px;height:46px;border-radius:13px;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.18);font-size:20px">⚲</span>
+          <span><span style="font-size:12px;opacity:.8;display:block">Location</span><strong style="font-size:15px;line-height:1.35;display:block">Lalitpur Metro.–18, Saibu</strong><span style="font-family:'Noto Sans Devanagari',sans-serif;font-size:12.5px;opacity:.85">ललितपुर महानगरपालिका–१८, सैंबु</span></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:15px;padding:16px;border-radius:16px;background:rgba(255,255,255,.12)">
+          <span style="width:46px;height:46px;border-radius:13px;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.18);font-size:20px">◷</span>
+          <span><span style="font-size:12px;opacity:.8;display:block">Open hours</span><strong style="font-size:15px">Sun – Fri · 6 AM – 6 PM</strong></span>
+        </div>
+        <a href="https://earth.google.com/web/search/khokana/@27.64357789,85.30422194,1365.05108919a,145.67282282d,35y,205.88818072h,0t,0r/data=CmUaNxIxCiUweDM5ZWIxNzlhM2RhMGY1YzM6MHgzMWY0N2Q5MTIwOWQ2ZjdiKghSYW0gS2FqaRgCIAEiJgokCTzKmQXraTVAETvKmQXraTXAGUxy6jZEiElAIR4-e7AUNErAQgIIAToDCgEwQgIIAEoNCP___________wEQAA" target="_blank" rel="noopener" style="display:block;margin-top:22px;position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.28);box-shadow:0 18px 40px -22px rgba(0,0,0,.6)" style-hover="transform:translateY(-2px)">
+          <img src="images/location-satellite.png" alt="Satellite map — Ram Kaji Driving Institute, Saibu, Lalitpur" style="display:block;width:100%;height:auto">
+          <span style="position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:7px;padding:9px 14px;border-radius:999px;background:rgba(12,35,66,.85);color:#fff;font-size:12.5px;font-weight:700;backdrop-filter:saturate(160%) blur(5px)"><span style="font-size:14px">⚲</span> View on Google Earth →</span>
+        </a>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line,#E3ECF7);border-radius:26px;padding:clamp(28px,4vw,42px);box-shadow:0 30px 70px -42px rgba(20,40,80,.5);display:flex;flex-direction:column;justify-content:center">
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ onSubmit }}">
+            <h3 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(22px,2.8vw,30px);margin:0 0 4px">Book your trial lesson</h3>
+            <p style="font-size:14.5px;color:var(--muted,#5C6E89);margin:0 0 24px">Leave your details and we'll call you back to arrange a time.</p>
+            <label style="display:block;font-size:13px;font-weight:700;color:var(--ink,#15233B);margin-bottom:7px">Full name</label>
+            <input value="{{ form.name }}" onChange="{{ onName }}" placeholder="Your name" style="width:100%;padding:14px 16px;border-radius:13px;border:1.5px solid var(--line,#E3ECF7);font:inherit;font-size:15px;margin-bottom:18px;background:#FAFCFF" style-focus="border-color:var(--primary,#1D6FE3);outline:none">
+            <label style="display:block;font-size:13px;font-weight:700;color:var(--ink,#15233B);margin-bottom:7px">Phone number</label>
+            <input value="{{ form.phone }}" onChange="{{ onPhone }}" placeholder="98XXXXXXXX" style="width:100%;padding:14px 16px;border-radius:13px;border:1.5px solid var(--line,#E3ECF7);font:inherit;font-size:15px;margin-bottom:18px;background:#FAFCFF" style-focus="border-color:var(--primary,#1D6FE3);outline:none">
+            <label style="display:block;font-size:13px;font-weight:700;color:var(--ink,#15233B);margin-bottom:7px">Which course?</label>
+            <select value="{{ form.course }}" onChange="{{ onCourse }}" style="width:100%;padding:14px 16px;border-radius:13px;border:1.5px solid var(--line,#E3ECF7);font:inherit;font-size:15px;margin-bottom:18px;background:#FAFCFF" style-focus="border-color:var(--primary,#1D6FE3);outline:none">
+              <option>Car driving</option>
+              <option>Motorcycle</option>
+              <option>Scooter</option>
+            </select>
+            <label style="display:block;font-size:13px;font-weight:700;color:var(--ink,#15233B);margin-bottom:7px">Message <span style="font-weight:400;color:var(--muted,#5C6E89)">(optional)</span></label>
+            <textarea value="{{ form.msg }}" onChange="{{ onMsg }}" rows="3" placeholder="Preferred timing, questions…" style="width:100%;padding:14px 16px;border-radius:13px;border:1.5px solid var(--line,#E3ECF7);font:inherit;font-size:15px;margin-bottom:22px;background:#FAFCFF;resize:vertical" style-focus="border-color:var(--primary,#1D6FE3);outline:none"></textarea>
+            <button type="submit" style="width:100%;padding:16px;border-radius:13px;border:none;background:var(--primary,#1D6FE3);color:#fff;font:inherit;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 14px 30px -12px rgba(29,111,227,.7)" style-hover="filter:brightness(1.06)">Request a call back →</button>
+          </form>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:20px 0">
+            <span style="width:74px;height:74px;border-radius:50%;display:inline-grid;place-items:center;background:rgba(31,158,107,.14);color:#1F9E6B;font-size:36px;margin-bottom:18px">✓</span>
+            <h3 style="font-family:'Sora',sans-serif;font-weight:800;font-size:26px;margin:0 0 8px">Thank you!</h3>
+            <p style="font-size:15px;color:var(--muted,#5C6E89);line-height:1.6;margin:0 0 6px">We've received your request and will call you back soon to arrange your trial lesson.</p>
+            <p style="font-family:'Noto Sans Devanagari',sans-serif;font-size:14px;color:var(--deep,#0E4FB0);margin:0 0 22px">धन्यवाद! हामी चाँडै सम्पर्क गर्नेछौं ।</p>
+            <button onClick="{{ onReset }}" style="padding:13px 24px;border-radius:999px;border:1.5px solid var(--line,#E3ECF7);background:#fff;color:var(--deep,#0E4FB0);font:inherit;font-weight:700;font-size:14.5px;cursor:pointer" style-hover="border-color:var(--primary,#1D6FE3)">Send another →</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="position:relative;z-index:2;background:#0C2342;color:#fff;margin-top:clamp(40px,6vw,80px)">
+    <div style="width:min(1180px,93vw);margin:0 auto;padding:clamp(40px,5vw,64px) 0 30px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+          <span style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(150deg,var(--primary,#1D6FE3),var(--deep,#0E4FB0));color:#fff;font-family:'Sora',sans-serif;font-weight:800;font-size:17px">RK</span>
+          <span style="line-height:1.1"><strong style="font-family:'Sora',sans-serif;font-size:16px;display:block">Ram Kaji Driving Institute</strong><span style="font-family:'Noto Sans Devanagari',sans-serif;font-size:12.5px;opacity:.7">रामकाजी ड्राइभिङ इन्स्टिच्युट</span></span>
+        </div>
+        <p style="font-size:13.5px;color:rgba(255,255,255,.62);line-height:1.6;max-width:26rem;margin:0">Skilled, experienced training for car, motorcycle and scooter — helping the people of Lalitpur drive safely and confidently.</p>
+      </div>
+      <div>
+        <strong style="font-family:'Sora',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;opacity:.6;display:block;margin-bottom:14px">Explore</strong>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="#home" style="color:rgba(255,255,255,.82);text-decoration:none;font-size:14px">Home</a>
+          <a href="#courses" style="color:rgba(255,255,255,.82);text-decoration:none;font-size:14px">Courses</a>
+          <a href="#about" style="color:rgba(255,255,255,.82);text-decoration:none;font-size:14px">About</a>
+          <a href="#contact" style="color:rgba(255,255,255,.82);text-decoration:none;font-size:14px">Contact</a>
+        </div>
+      </div>
+      <div>
+        <strong style="font-family:'Sora',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;opacity:.6;display:block;margin-bottom:14px">Contact</strong>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;color:rgba(255,255,255,.82)">
+          <a href="tel:9841346288" style="color:#fff;text-decoration:none;font-weight:700;font-size:18px;font-family:'Sora',sans-serif">9841346288</a>
+          <span>Lalitpur Metro.–18, Saibu</span>
+          <span style="font-family:'Noto Sans Devanagari',sans-serif;font-size:13px;opacity:.8">ललितपुर, नेपाल</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.12)">
+      <div style="width:min(1180px,93vw);margin:0 auto;padding:18px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:12.5px;color:rgba(255,255,255,.5)">
+        <span>© 2026 Ram Kaji Driving Institute. All rights reserved.</span>
+        <span>Lalitpur · Nepal</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Sky blue&quot;,&quot;Sunset&quot;,&quot;Forest&quot;],&quot;default&quot;:&quot;Sky blue&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;roadStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Glow trail&quot;,&quot;Minimal line&quot;],&quot;default&quot;:&quot;Glow trail&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;weave&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Gentle&quot;,&quot;Lively&quot;],&quot;default&quot;:&quot;Gentle&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { sent: false, form: { name: '', phone: '', course: 'Car driving', msg: '' } };
+
+  componentDidMount() {
+    this.build = this.build.bind(this);
+    this._rebuild = () => this.build();
+    this._loop = this._loop.bind(this);
+    window.addEventListener('resize', this._rebuild, { passive: true });
+    window.addEventListener('load', this._rebuild);
+    requestAnimationFrame(() => { this.build(); });
+    [120, 400, 900, 1800].forEach(t => setTimeout(this._rebuild, t));
+    this._raf = requestAnimationFrame(this._loop);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._rebuild);
+    window.removeEventListener('load', this._rebuild);
+    if (this._raf) cancelAnimationFrame(this._raf);
+  }
+  _loop() {
+    this.frame();
+    this._raf = requestAnimationFrame(this._loop);
+  }
+  componentDidUpdate() { this.build(); }
+
+  themeColors() {
+    const m = {
+      'Sky blue': { primary: '#1D6FE3', deep: '#0E4FB0', accent: '#FF9A3D', trailA: '#FFB03A', trailB: '#FF4D6D' },
+      'Sunset':   { primary: '#F2682C', deep: '#C0440F', accent: '#FFB23D', trailA: '#FFC53D', trailB: '#FF3D6E' },
+      'Forest':   { primary: '#1F9E6B', deep: '#11724B', accent: '#FF9A3D', trailA: '#FFD23D', trailB: '#FF6B4D' },
+    };
+    return m[this.props.theme] || m['Sky blue'];
+  }
+  hexA(h, a) {
+    h = (h || '#000').replace('#', '');
+    const n = parseInt(h, 16);
+    return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+  }
+
+  applyTheme() {
+    const root = document.getElementById('rk-root'); if (!root) return;
+    const t = this.themeColors();
+    root.style.setProperty('--primary', t.primary);
+    root.style.setProperty('--deep', t.deep);
+    root.style.setProperty('--accent', t.accent);
+    root.style.setProperty('--trailA', t.trailA);
+    root.style.setProperty('--trailB', t.trailB);
+    const s0 = document.getElementById('rk-s0'), s1 = document.getElementById('rk-s1');
+    if (s0) s0.setAttribute('stop-color', t.trailA);
+    if (s1) s1.setAttribute('stop-color', t.trailB);
+    const minimal = this.props.roadStyle === 'Minimal line';
+    const road = document.getElementById('rk-road'), dash = document.getElementById('rk-dash'), trail = document.getElementById('rk-trail');
+    if (road) road.style.opacity = minimal ? 0 : 1;
+    if (dash) dash.style.opacity = minimal ? 0 : 1;
+    if (trail) {
+      trail.setAttribute('stroke-width', minimal ? 5 : 8);
+      trail.style.filter = `drop-shadow(0 0 6px ${this.hexA(t.trailB, .6)}) drop-shadow(0 0 13px ${this.hexA(t.trailA, .35)})`;
+    }
+  }
+
+  build() {
+    const root = document.getElementById('rk-root'); if (!root) return;
+    const svg = document.getElementById('rk-svg');
+    const road = document.getElementById('rk-road');
+    const dash = document.getElementById('rk-dash');
+    const trail = document.getElementById('rk-trail');
+    if (!svg || !trail) return;
+    const W = root.clientWidth, H = root.scrollHeight;
+    if (!W || !H) return;
+    svg.setAttribute('width', W); svg.setAttribute('height', H);
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+    const cx = W * 0.5;
+    const lively = this.props.weave === 'Lively';
+    const amp = Math.min(W * (lively ? 0.34 : 0.27), lively ? 360 : 300);
+    const seg = lively ? 440 : 520;
+
+    const pts = [{ x: cx, y: 0 }];
+    let sign = 1, yy = seg;
+    while (yy < H + seg * 0.5) { pts.push({ x: cx + sign * amp, y: Math.min(yy, H) }); sign *= -1; yy += seg; }
+    if (pts[pts.length - 1].y < H - 1) pts.push({ x: cx, y: H });
+
+    let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+    for (let k = 1; k < pts.length; k++) {
+      const a = pts[k - 1], b = pts[k], m = (b.y - a.y) * 0.5;
+      d += ` C ${a.x.toFixed(1)} ${(a.y + m).toFixed(1)} ${b.x.toFixed(1)} ${(b.y - m).toFixed(1)} ${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
+    }
+    [road, dash, trail].forEach(p => p && p.setAttribute('d', d));
+    const grad = document.getElementById('rk-grad'); if (grad) grad.setAttribute('y2', H);
+
+    this.total = trail.getTotalLength();
+    trail.style.strokeDasharray = this.total + ' ' + this.total;
+    this.applyTheme();
+    this.frame();
+  }
+
+  frame() {
+    const root = document.getElementById('rk-root');
+    const trail = document.getElementById('rk-trail');
+    const car = document.getElementById('rk-car');
+    if (!root || !trail || !this.total) return;
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const rect = root.getBoundingClientRect();
+    const range = rect.height - vh;
+    let p = range > 0 ? (-rect.top) / range : 0;
+    p = Math.max(0, Math.min(1, p));
+    if (this._lastP !== undefined && Math.abs(p - this._lastP) < 0.0005) return;
+    this._lastP = p;
+    const len = this.total * p;
+    trail.style.strokeDashoffset = this.total - len;
+    const L = Math.max(0.5, Math.min(len, this.total - 0.5));
+    const a = trail.getPointAtLength(L);
+    const b = trail.getPointAtLength(Math.min(L + 2, this.total));
+    const ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
+    if (car) car.style.transform = `translate(${a.x}px,${a.y}px) translate(-50%,-50%) rotate(${ang + 90}deg)`;
+  }
+
+  setField(k, v) { this.setState(s => ({ form: { ...s.form, [k]: v } })); }
+
+  renderVals() {
+    const f = this.state.form;
+    return {
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      form: f,
+      onName: e => this.setField('name', e.target.value),
+      onPhone: e => this.setField('phone', e.target.value),
+      onCourse: e => this.setField('course', e.target.value),
+      onMsg: e => this.setField('msg', e.target.value),
+      onSubmit: e => { e.preventDefault(); this.setState({ sent: true }); },
+      onReset: () => this.setState({ sent: false, form: { name: '', phone: '', course: 'Car driving', msg: '' } }),
+    };
+  }
+}
+</script>
+</body>
+</html>
